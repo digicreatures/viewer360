@@ -26,19 +26,24 @@ function setup_viewer360(canvas) {
   var camera = new THREE.PerspectiveCamera(75, canvas.clientWidth / canvas.clientHeight, 1, 1000);
   camera.target = new THREE.Vector3(0, 0, 0);
 
-  // creation of a big sphere geometry
-  var sphere = new THREE.SphereGeometry(100, 100, 40);
-  sphere.applyMatrix(new THREE.Matrix4().makeScale(-1, 1, 1));
+  var textureLoader = new THREE.TextureLoader();
 
-  // creation of the sphere material
-  var sphereMaterial = new THREE.MeshBasicMaterial();
-  sphereMaterial.map = THREE.ImageUtils.loadTexture(panorama)
+  textureLoader.load(panorama, function (texture){
+      // creation of a big sphere geometry
+      var sphere = new THREE.SphereGeometry(100, 100, 40);
+      sphere.applyMatrix(new THREE.Matrix4().makeScale(-1, 1, 1));
 
-  // geometry + material = mesh (actual object)
-  var sphereMesh = new THREE.Mesh(sphere, sphereMaterial);
-  scene.add(sphereMesh);
+      // creation of the sphere material
+      var sphereMaterial = new THREE.MeshBasicMaterial();
 
-  render();
+      var sphereMaterial = new THREE.MeshBasicMaterial();
+      sphereMaterial.map = texture;
+      // geometry + material = mesh (actual object)
+      var sphereMesh = new THREE.Mesh(sphere, sphereMaterial);
+      scene.add(sphereMesh);
+      render();
+  })
+
 
   var longitude = 0;
   var latitude = 0;
