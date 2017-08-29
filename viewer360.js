@@ -60,9 +60,9 @@ function setup_viewer360(canvas) {
     var currentLatitude = Math.max(-85, Math.min(85, latitude + deltaLatitude));
 
     // moving the camera according to current latitude (vertical movement) and longitude (horizontal movement)
-    camera.target.x = 500 * Math.sin(THREE.Math.degToRad(90 - currentLatitude)) * Math.cos(THREE.Math.degToRad(currentLongitude));
+    camera.target.x = -500 * Math.sin(THREE.Math.degToRad(90 - currentLatitude)) * Math.cos(THREE.Math.degToRad(currentLongitude));
     camera.target.y = 500 * Math.cos(THREE.Math.degToRad(90 - currentLatitude));
-    camera.target.z = 500 * Math.sin(THREE.Math.degToRad(90 - currentLatitude)) * Math.sin(THREE.Math.degToRad(currentLongitude));
+    camera.target.z = -500 * Math.sin(THREE.Math.degToRad(90 - currentLatitude)) * Math.sin(THREE.Math.degToRad(currentLongitude));
     camera.lookAt(camera.target);
 
     // calling again render function
